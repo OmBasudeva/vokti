@@ -60,7 +60,7 @@ const SCRIPTURES_DATA = [
     englishTitle: 'Sri Navagraha Stotram',
     category: 'stotram',
     format: 'pdf',
-    filename: 'pdfs/শ্রী নবগ্রহ স্তোত্রম্.pdf',
+    filename: 'pdfs/শ্রী নবগ্রহ স্তোত্রম্.pdf',
     fileSize: '64 KB',
     description: 'ব্যাসদেব বিরচিত পবিত্র শ্রী নবগ্রহ স্তোত্রম্ — রবি, চন্দ্র, মঙ্গল, বুধ, বৃহস্পতি, শুক্র, শনি, রাহু ও কেতুর শান্তি ও বিঘ্ননাশন স্তব।',
     icon: '🪐',
@@ -92,9 +92,9 @@ const SCRIPTURES_DATA = [
   }
 ];
 
-// Helper: Safely encode path segments while preserving directory slashes
+// Helper: Safely encode path segments while preserving directory slashes (NFC normalized)
 function getSafePath(path) {
-  return path.split('/').map(segment => encodeURIComponent(segment)).join('/');
+  return path.normalize('NFC').split('/').map(segment => encodeURIComponent(segment.normalize('NFC'))).join('/');
 }
 
 // Bengali Numeral Helper
