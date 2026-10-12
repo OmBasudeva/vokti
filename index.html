@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ভক্তি (Vokti) — হিন্দু ধর্মগ্রন্থ ও স্তোত্র সংকলন</title>
+  <meta name="description" content="পবিত্র সনাতন হিন্দু ধর্মগ্রন্থ, স্তোত্র ও পাঠের উন্মুক্ত সংকলন। অনলাইনে সরাসরি পড়ুন ও ডাউনলোড করুন।">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕉️</text></svg>">
+</head>
+<body>
+  <!-- Header / Hero -->
+  <header class="hero-section">
+    <div class="decor-glow"></div>
+    <div class="container hero-content">
+      <div class="sacred-symbol" aria-hidden="true">
+        <span class="om-symbol">ॐ</span>
+      </div>
+      <h1 class="main-title">ভক্তি <span class="english-title">VOKTI</span></h1>
+      <p class="tagline">পবিত্র সনাতন ধর্মগ্রন্থ, দেবদেবীর স্তোত্র ও সাধনা সাহিত্যের সংকলন</p>
+      <div class="meta-badges">
+        <span class="badge"><span class="badge-dot"></span> উন্মুক্ত ডিজিটাল পাঠাগার</span>
+        <span class="badge" id="library-count">৩টি পবিত্র গ্রন্থ সংরক্ষিত</span>
+        <a href="https://github.com/OmBasudeva/vokti" target="_blank" rel="noopener noreferrer" class="badge github-badge" id="github-repo-link">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub রিপোজিটরি
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container main-container">
+    <!-- Search & Filter Controls -->
+    <div class="controls-panel">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" placeholder="গ্রন্থ বা স্তোত্রের নাম দিয়ে খুঁজুন (যেমন: চণ্ডী, আদ্যা...)" autocomplete="off">
+        <button id="clearSearch" class="clear-btn" aria-label="Clear search" style="display:none;">✕</button>
+      </div>
+      <div class="filter-chips">
+        <button class="chip active" data-filter="all">সকল গ্রন্থ</button>
+        <button class="chip" data-filter="stotram">স্তোত্র</button>
+        <button class="chip" data-filter="scripture">মহাপবিত্র গ্রন্থ</button>
+        <button class="chip" data-filter="pdf">PDF ফরম্যাট</button>
+      </div>
+    </div>
+
+    <!-- Scripture Grid -->
+    <section class="scriptures-grid" id="scripturesGrid">
+      <!-- Cards rendered via JavaScript -->
+    </section>
+
+    <!-- Empty state message if search finds nothing -->
+    <div id="noResults" class="empty-state" style="display: none;">
+      <p class="empty-icon">🪔</p>
+      <h3>কোনো ফলাফল পাওয়া যায়নি</h3>
+      <p>অনুগ্রহ করে অন্য শব্দ লিখে অনুসন্ধান করুন</p>
+    </div>
+  </main>
+
+  <!-- Interactive In-Page Reader Modal -->
+  <div id="readerModal" class="modal-overlay" aria-hidden="true" role="dialog">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 id="modalTitle" class="modal-title">আদ্যাস্তোত্রম</h2>
+          <span id="modalMeta" class="modal-subtitle">PDF Reader</span>
+        </div>
+        <div class="modal-actions">
+          <a id="modalDownloadBtn" href="#" download class="btn-action btn-sm">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            ডাউনলোড
+          </a>
+          <button id="modalNewTabBtn" class="btn-action btn-sm" title="নতুন ট্যাবে খুলুন">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </button>
+          <button id="closeModalBtn" class="close-btn" aria-label="Close reader">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe id="pdfFrame" src="" title="PDF Viewer" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p class="shloka">সর্বমঙ্গলমঙ্গল্যে শিবে সর্বার্থসাধিকে। শরণ্যে ত্র্যম্বকে গৌরি নারায়ণি নমোহস্তুতে॥</p>
+      <p class="copyright">ভক্তি সংকলন • সর্বস্বত্ব মুক্ত (Creative Commons / Open Devotional Library)</p>
+      <p class="sub-link">
+        সংরক্ষিত ও প্রকাশিত: <a href="https://github.com/OmBasudeva" target="_blank" rel="noopener noreferrer">@OmBasudeva</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
