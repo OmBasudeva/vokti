@@ -1,5 +1,10 @@
 // Vokti (ভক্তি) Application Script
 
+// Configure Mozilla PDF.js Worker
+if (window.pdfjsLib) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+
 const SCRIPTURES_DATA = [
   {
     id: 'adya-stotram-pdf',
@@ -68,6 +73,12 @@ function getSafePath(path) {
   return path.split('/').map(segment => encodeURIComponent(segment)).join('/');
 }
 
+// Bengali Numeral Helper
+function toBengaliNumber(num) {
+  const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  return num.toString().split('').map(d => bengaliDigits[parseInt(d)] || d).join('');
+}
+
 // DOM Elements
 const scripturesGrid = document.getElementById('scripturesGrid');
 const searchInput = document.getElementById('searchInput');
@@ -76,18 +87,37 @@ const filterChips = document.querySelectorAll('.chip');
 const noResults = document.getElementById('noResults');
 const libraryCount = document.getElementById('library-count');
 
-// Modal Elements
+// Reader Elements
 const readerModal = document.getElementById('readerModal');
 const modalTitle = document.getElementById('modalTitle');
 const modalMeta = document.getElementById('modalMeta');
 const modalDownloadBtn = document.getElementById('modalDownloadBtn');
-const modalNewTabBtn = document.getElementById('modalNewTabBtn');
 const closeModalBtn = document.getElementById('closeModalBtn');
-const pdfFrame = document.getElementById('pdfFrame');
+const canvasContainer = document.getElementById('canvasContainer');
+const pdfCanvas = document.getElementById('pdfCanvas');
+const pdfLoading = document.getElementById('pdfLoading');
+
+const prevPageBtn = document.getElementById('prevPageBtn');
+const nextPageBtn = document.getElementById('nextPageBtn');
+const pageNumberInput = document.getElementById('pageNumberInput');
+const totalPagesCount = document.getElementById('totalPagesCount');
+const zoomInBtn = document.getElementById('zoomInBtn');
+const zoomOutBtn = document.getElementById('zoomOutBtn');
+const zoomPercent = document.getElementById('zoomPercent');
+const fitWidthBtn = document.getElementById('fitWidthBtn');
+
+// Reader State
+let currentPdfDoc = null;
+let currentPageNum = 1;
+let totalPages = 1;
+let currentZoomScale = 1.0;
+let isFitWidth = true;
+let isRendering = false;
+let renderTask = null;
+let currentLoadingTask = null;
 
 let currentFilter = 'all';
 let currentSearch = '';
-let currentOpenDoc = null;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -100,13 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderScriptures() {
   const filtered = SCRIPTURES_DATA.filter(item => {
-    // Filter by category/format
     const matchesFilter = 
       currentFilter === 'all' ||
       item.category === currentFilter ||
       item.format === currentFilter;
 
-    // Filter by search query
     const query = currentSearch.toLowerCase().trim();
     const matchesSearch = 
       !query ||
@@ -194,11 +222,14 @@ function createScriptureCard(item) {
   return card;
 }
 
+// ==========================================================================
+// Mozilla PDF.js In-Browser Canvas Reader (Android & Desktop Compatible)
+// ==========================================================================
+
 function openReader(id) {
   const doc = SCRIPTURES_DATA.find(d => d.id === id);
   if (!doc) return;
 
-  currentOpenDoc = doc;
   const safePath = getSafePath(doc.filename);
   const downloadName = doc.filename.split('/').pop();
 
@@ -207,19 +238,154 @@ function openReader(id) {
   modalDownloadBtn.href = safePath;
   modalDownloadBtn.download = downloadName;
 
-  pdfFrame.src = safePath;
+  // Open modal
   readerModal.classList.add('open');
   readerModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+
+  // Show loading
+  pdfLoading.style.display = 'flex';
+  pdfCanvas.style.display = 'none';
+
+  currentPageNum = 1;
+  isFitWidth = true;
+  currentZoomScale = 1.0;
+  updateZoomDisplay();
+
+  // Cancel any prior loading task
+  if (currentLoadingTask) {
+    currentLoadingTask.destroy();
+  }
+
+  // Load PDF document using PDF.js
+  currentLoadingTask = pdfjsLib.getDocument({
+    url: safePath,
+    cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
+    cMapPacked: true,
+  });
+
+  currentLoadingTask.promise.then(pdf => {
+    currentPdfDoc = pdf;
+    totalPages = pdf.numPages;
+    totalPagesCount.textContent = totalPages;
+    pageNumberInput.max = totalPages;
+    pageNumberInput.value = 1;
+
+    renderPage(1);
+  }).catch(err => {
+    console.error('PDF Load Error:', err);
+    pdfLoading.innerHTML = `
+      <p>⚠️ নথিটি লোড করতে সমস্যা হয়েছে।</p>
+      <a href="${safePath}" download="${downloadName}" class="btn-action">সরাসরি ডাউনলোড করুন</a>
+    `;
+  });
+}
+
+function renderPage(num) {
+  if (!currentPdfDoc) return;
+  if (num < 1 || num > totalPages) return;
+
+  if (renderTask) {
+    renderTask.cancel();
+  }
+
+  isRendering = true;
+  pdfLoading.style.display = 'flex';
+
+  currentPdfDoc.getPage(num).then(page => {
+    const containerWidth = Math.max(canvasContainer.clientWidth - 32, 280);
+    const unscaledViewport = page.getViewport({ scale: 1.0 });
+
+    let calculatedScale;
+    if (isFitWidth || window.innerWidth < 640) {
+      // Auto-fit to screen/container width
+      calculatedScale = (containerWidth / unscaledViewport.width) * currentZoomScale;
+    } else {
+      calculatedScale = currentZoomScale * 1.25;
+    }
+
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2.5); // crisp retina rendering
+    const viewport = page.getViewport({ scale: calculatedScale });
+
+    pdfCanvas.width = viewport.width * pixelRatio;
+    pdfCanvas.height = viewport.height * pixelRatio;
+    pdfCanvas.style.width = `${viewport.width}px`;
+    pdfCanvas.style.height = `${viewport.height}px`;
+
+    const ctx = pdfCanvas.getContext('2d');
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+    const renderContext = {
+      canvasContext: ctx,
+      viewport: viewport
+    };
+
+    renderTask = page.render(renderContext);
+
+    renderTask.promise.then(() => {
+      isRendering = false;
+      pdfLoading.style.display = 'none';
+      pdfCanvas.style.display = 'block';
+    }).catch(err => {
+      if (err.name !== 'RenderingCancelledException') {
+        console.error('Page render error:', err);
+      }
+    });
+
+    // Update controls
+    currentPageNum = num;
+    pageNumberInput.value = num;
+    prevPageBtn.disabled = (num <= 1);
+    nextPageBtn.disabled = (num >= totalPages);
+
+    // Scroll viewer to top on page change
+    canvasContainer.scrollTop = 0;
+  });
+}
+
+function updateZoomDisplay() {
+  const percent = Math.round(currentZoomScale * 100);
+  zoomPercent.textContent = `${percent}%`;
+}
+
+function zoomIn() {
+  isFitWidth = false;
+  currentZoomScale = Math.min(currentZoomScale + 0.2, 3.0);
+  updateZoomDisplay();
+  renderPage(currentPageNum);
+}
+
+function zoomOut() {
+  isFitWidth = false;
+  currentZoomScale = Math.max(currentZoomScale - 0.2, 0.5);
+  updateZoomDisplay();
+  renderPage(currentPageNum);
+}
+
+function fitWidth() {
+  isFitWidth = true;
+  currentZoomScale = 1.0;
+  updateZoomDisplay();
+  renderPage(currentPageNum);
 }
 
 function closeReader() {
   readerModal.classList.remove('open');
   readerModal.setAttribute('aria-hidden', 'true');
-  pdfFrame.src = '';
   document.body.style.overflow = '';
-  currentOpenDoc = null;
+
+  if (renderTask) {
+    renderTask.cancel();
+  }
+  if (currentPdfDoc) {
+    currentPdfDoc.destroy();
+    currentPdfDoc = null;
+  }
 }
+
+// ==========================================================================
+// Event Listeners & Gestures
+// ==========================================================================
 
 function setupEventListeners() {
   // Search
@@ -255,15 +421,88 @@ function setupEventListeners() {
     }
   });
 
-  modalNewTabBtn.addEventListener('click', () => {
-    if (currentOpenDoc) {
-      window.open(getSafePath(currentOpenDoc.filename), '_blank');
+  // Page navigation
+  prevPageBtn.addEventListener('click', () => {
+    if (currentPageNum > 1) {
+      renderPage(currentPageNum - 1);
     }
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && readerModal.classList.contains('open')) {
-      closeReader();
+  nextPageBtn.addEventListener('click', () => {
+    if (currentPageNum < totalPages) {
+      renderPage(currentPageNum + 1);
     }
+  });
+
+  pageNumberInput.addEventListener('change', (e) => {
+    const target = parseInt(e.target.value);
+    if (!isNaN(target) && target >= 1 && target <= totalPages) {
+      renderPage(target);
+    } else {
+      e.target.value = currentPageNum;
+    }
+  });
+
+  // Zoom controls
+  zoomInBtn.addEventListener('click', zoomIn);
+  zoomOutBtn.addEventListener('click', zoomOut);
+  fitWidthBtn.addEventListener('click', fitWidth);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!readerModal.classList.contains('open')) return;
+
+    if (e.key === 'Escape') {
+      closeReader();
+    } else if (e.key === 'ArrowLeft' && currentPageNum > 1) {
+      renderPage(currentPageNum - 1);
+    } else if (e.key === 'ArrowRight' && currentPageNum < totalPages) {
+      renderPage(currentPageNum + 1);
+    }
+  });
+
+  // Touch Swipe for Mobile Navigation (Android & iOS)
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+
+  canvasContainer.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+    }
+  }, { passive: true });
+
+  canvasContainer.addEventListener('touchend', (e) => {
+    if (e.changedTouches.length === 1) {
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+      const timeDiff = Date.now() - touchStartTime;
+
+      // Only trigger if horizontal swipe is larger than vertical movement and took < 500ms
+      if (Math.abs(diffX) > 60 && Math.abs(diffX) > Math.abs(diffY) * 1.5 && timeDiff < 500) {
+        if (diffX < 0 && currentPageNum < totalPages) {
+          // Swipe Left -> Next Page
+          renderPage(currentPageNum + 1);
+        } else if (diffX > 0 && currentPageNum > 1) {
+          // Swipe Right -> Previous Page
+          renderPage(currentPageNum - 1);
+        }
+      }
+    }
+  }, { passive: true });
+
+  // Handle window resize for dynamic canvas scaling
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      if (readerModal.classList.contains('open') && isFitWidth) {
+        renderPage(currentPageNum);
+      }
+    }, 200);
   });
 }

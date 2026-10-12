@@ -11,8 +11,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕉️</text></svg>">
+  <!-- Mozilla PDF.js for Native In-Browser & Mobile Rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
   <!-- Header / Hero -->
@@ -74,6 +76,7 @@
   <!-- Interactive In-Page Reader Modal -->
   <div id="readerModal" class="modal-overlay" aria-hidden="true" role="dialog">
     <div class="modal-window">
+      <!-- Modal Header -->
       <div class="modal-header">
         <div class="modal-title-group">
           <h2 id="modalTitle" class="modal-title">আদ্যাস্তোত্রম</h2>
@@ -88,18 +91,56 @@
             </svg>
             ডাউনলোড
           </a>
-          <button id="modalNewTabBtn" class="btn-action btn-sm" title="নতুন ট্যাবে খুলুন">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-          </button>
           <button id="closeModalBtn" class="close-btn" aria-label="Close reader">&times;</button>
         </div>
       </div>
-      <div class="modal-body">
-        <iframe id="pdfFrame" src="" title="PDF Viewer" loading="lazy"></iframe>
+
+      <!-- Reader Navigation & Zoom Toolbar -->
+      <div class="reader-toolbar">
+        <div class="page-nav-controls">
+          <button id="prevPageBtn" class="tool-btn" title="পূর্ববর্তী পৃষ্ঠা">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            পূর্ববর্তী
+          </button>
+          <div class="page-indicator">
+            পৃষ্ঠা <input type="number" id="pageNumberInput" min="1" value="1"> / <span id="totalPagesCount">--</span>
+          </div>
+          <button id="nextPageBtn" class="tool-btn" title="পরবর্তী পৃষ্ঠা">
+            পরবর্তী
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="zoom-controls">
+          <button id="zoomOutBtn" class="tool-btn icon-only" title="ছোট করুন">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <span id="zoomPercent" class="zoom-text">১০০%</span>
+          <button id="zoomInBtn" class="tool-btn icon-only" title="বড় করুন">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <button id="fitWidthBtn" class="tool-btn fit-btn" title="স্ক্রিনে ফিট করুন">ফিট</button>
+        </div>
+      </div>
+
+      <!-- Scrollable Canvas Viewer -->
+      <div class="modal-body" id="canvasContainer">
+        <div id="pdfLoading" class="pdf-loading-state">
+          <div class="spinner"></div>
+          <p>পবিত্র গ্রন্থ লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...</p>
+        </div>
+        <div class="canvas-wrapper">
+          <canvas id="pdfCanvas"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -115,6 +156,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
