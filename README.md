@@ -1,6 +1,9 @@
 # Vokti (ভক্তি)
 
-A curated repository of Hindu scriptures, stotrams, and devotional texts.
+> 🌐 **ওয়েবসাইট (Live Web Portal):** [https://ombasudeva.github.io/vokti/](https://ombasudeva.github.io/vokti/)
+
+A curated repository and digital library of Hindu scriptures, stotrams, and devotional texts.
+You can read the scriptures directly online or download them from the web portal.
 
 ## Contents
 
