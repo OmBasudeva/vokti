@@ -8,10 +8,12 @@ You can read the scriptures directly online or download them from the web portal
 ## Contents
 
 ### PDFs (`pdfs/`)
+- **pdfs/শ্রী নবগ্রহ স্তোত্রম্.pdf** - Sri Navagraha Stotram (64 KB)
 - **pdfs/মহানির্ব্বাণ তন্ত্র - শ্রী শ্যামাচরণ কবিরত্ন.pdf** - Mahanirban Tantram (Sri Shyamacharan Kabiratna, 476 pages)
 - **pdfs/মহানির্ব্বাণ তন্ত্র (১৮৮৯ সংস্করণ).pdf** - Mahanirban Tantram (1889 Bangabasi edition, 308 pages)
 - **pdfs/শ্রী শ্রী চণ্ডী.pdf** - Sri Sri Chandi (Devi Mahatmyam)
 - **pdfs/আদ্যাস্তোত্রম.pdf** - Adya Stotram
 
 ### Word Documents
+- **শ্রী নবগ্রহ স্তোত্রম্.docx** - Sri Navagraha Stotram (Word format)
 - **ঔং নম আদ্যায়ৈ.docx** - Om Namo Adyayai / Adya Stotram (Word format)
