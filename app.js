@@ -7,7 +7,7 @@ const SCRIPTURES_DATA = [
     englishTitle: 'Adya Stotram',
     category: 'stotram',
     format: 'pdf',
-    filename: 'আদ্যাস্তোত্রম.pdf',
+    filename: 'pdfs/আদ্যাস্তোত্রম.pdf',
     fileSize: '89 KB',
     description: 'ব্রহ্মযামলোক্ত আদ্যাস্তোত্রম্ — মা আদ্যাশক্তির পরম কল্যাণকারী ও বিঘ্ননাশক মহাশক্তিশালী স্তোত্র।',
     icon: '🪔',
@@ -19,10 +19,34 @@ const SCRIPTURES_DATA = [
     englishTitle: 'Sri Sri Chandi (Devi Mahatmyam)',
     category: 'scripture',
     format: 'pdf',
-    filename: 'শ্রী শ্রী চণ্ডী.pdf',
+    filename: 'pdfs/শ্রী শ্রী চণ্ডী.pdf',
     fileSize: '13.3 MB',
     description: 'শ্রীশ্রীচণ্ডী বা দেবী মাহাত্ম্যম্ — মার্কণ্ডেয় পুরাণান্তর্গত দেবী দুর্গার অলৌকিক মাহাত্ম্য, লীলা ও স্তুতি সংবলিত মহাপবিত্র গ্রন্থ।',
     icon: '🕉️',
+    canPreview: true
+  },
+  {
+    id: 'mahanirban-tantram-shyamacharan-pdf',
+    title: 'মহানির্ব্বাণ তন্ত্র (শ্রী শ্যামাচরণ কবিরত্ন)',
+    englishTitle: 'Mahanirban Tantram - Sri Shyamacharan Kabiratna',
+    category: 'scripture',
+    format: 'pdf',
+    filename: 'pdfs/মহানির্ব্বাণ তন্ত্র - শ্রী শ্যামাচরণ কবিরত্ন.pdf',
+    fileSize: '36.5 MB',
+    description: 'মহানির্ব্বাণ তন্ত্র — শ্রী শ্যামাচরণ কবিরত্ন সম্পাদিত প্রামাণ্য শাস্ত্রগ্রন্থ (শান্তিনিকেতন বিশ্বভারতী লাইব্রেরির মূল সংস্করণ, ৪৭৬ পৃষ্ঠা)।',
+    icon: '🔱',
+    canPreview: true
+  },
+  {
+    id: 'mahanirban-tantram-1889-pdf',
+    title: 'মহানির্ব্বাণ তন্ত্র (১৮৮৯ সংস্করণ)',
+    englishTitle: 'Mahanirban Tantram (1889 Edition)',
+    category: 'scripture',
+    format: 'pdf',
+    filename: 'pdfs/মহানির্ব্বাণ তন্ত্র (১৮৮৯ সংস্করণ).pdf',
+    fileSize: '30.8 MB',
+    description: 'শ্রীশ্রীমহানির্ব্বাণতন্ত্রম্ — ১২৯৬ বঙ্গাব্দের দুর্লভ বঙ্গবাসী সংস্করণ, শ্রীবিহারীলাল সরকার দ্বারা মুদ্রিত ও প্রকাশিত (৩০৮ পৃষ্ঠা)।',
+    icon: '📜',
     canPreview: true
   },
   {
@@ -34,10 +58,15 @@ const SCRIPTURES_DATA = [
     filename: 'ঔং নম আদ্যায়ৈ.docx',
     fileSize: '16 KB',
     description: 'আদ্যা স্তোত্রের পবিত্র মূল স্তোত্রপাঠ ও শ্লোকাবলী (Microsoft Word / সম্পাদনাযোগ্য ফরম্যাট)।',
-    icon: '📜',
+    icon: '🪔',
     canPreview: false
   }
 ];
+
+// Helper: Safely encode path segments while preserving directory slashes
+function getSafePath(path) {
+  return path.split('/').map(segment => encodeURIComponent(segment)).join('/');
+}
 
 // DOM Elements
 const scripturesGrid = document.getElementById('scripturesGrid');
@@ -45,6 +74,7 @@ const searchInput = document.getElementById('searchInput');
 const clearSearchBtn = document.getElementById('clearSearch');
 const filterChips = document.querySelectorAll('.chip');
 const noResults = document.getElementById('noResults');
+const libraryCount = document.getElementById('library-count');
 
 // Modal Elements
 const readerModal = document.getElementById('readerModal');
@@ -61,6 +91,9 @@ let currentOpenDoc = null;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+  if (libraryCount) {
+    libraryCount.textContent = `${SCRIPTURES_DATA.length}টি পবিত্র গ্রন্থ সংরক্ষিত`;
+  }
   renderScriptures();
   setupEventListeners();
 });
@@ -102,7 +135,8 @@ function createScriptureCard(item) {
   card.className = 'scripture-card';
   card.dataset.id = item.id;
 
-  const encodedFilename = encodeURIComponent(item.filename);
+  const safePath = getSafePath(item.filename);
+  const downloadName = item.filename.split('/').pop();
 
   const actionsHtml = item.canPreview 
     ? `
@@ -114,7 +148,7 @@ function createScriptureCard(item) {
           </svg>
           অনলাইনে পড়ুন
         </button>
-        <a href="${encodedFilename}" download="${item.filename}" class="btn-download" aria-label="ডাউনলোড ${item.title}">
+        <a href="${safePath}" download="${downloadName}" class="btn-download" aria-label="ডাউনলোড ${item.title}">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
@@ -126,7 +160,7 @@ function createScriptureCard(item) {
     `
     : `
       <div class="card-actions single-action">
-        <a href="${encodedFilename}" download="${item.filename}" class="btn-download" aria-label="ডাউনলোড ${item.title}">
+        <a href="${safePath}" download="${downloadName}" class="btn-download" aria-label="ডাউনলোড ${item.title}">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
@@ -165,14 +199,15 @@ function openReader(id) {
   if (!doc) return;
 
   currentOpenDoc = doc;
-  const encodedFilename = encodeURIComponent(doc.filename);
+  const safePath = getSafePath(doc.filename);
+  const downloadName = doc.filename.split('/').pop();
 
   modalTitle.textContent = doc.title;
   modalMeta.textContent = `${doc.englishTitle} (${doc.fileSize})`;
-  modalDownloadBtn.href = encodedFilename;
-  modalDownloadBtn.download = doc.filename;
+  modalDownloadBtn.href = safePath;
+  modalDownloadBtn.download = downloadName;
 
-  pdfFrame.src = encodedFilename;
+  pdfFrame.src = safePath;
   readerModal.classList.add('open');
   readerModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
@@ -222,7 +257,7 @@ function setupEventListeners() {
 
   modalNewTabBtn.addEventListener('click', () => {
     if (currentOpenDoc) {
-      window.open(encodeURIComponent(currentOpenDoc.filename), '_blank');
+      window.open(getSafePath(currentOpenDoc.filename), '_blank');
     }
   });
 
