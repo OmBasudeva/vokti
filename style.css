@@ -774,6 +774,305 @@ body {
 }
 
 /* ==========================================================================
+   Pronam Mantra Styles
+   ========================================================================== */
+
+.mantra-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.back-link:hover {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: var(--gold-light);
+  color: #fff;
+  transform: translateX(-2px);
+}
+
+.mantra-actions-header {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-toggle-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: var(--gold-light);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-toggle-all:hover {
+  background: rgba(245, 158, 11, 0.25);
+  border-color: var(--gold-light);
+  color: #fff;
+}
+
+.mantra-card {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.mantra-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.mantra-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.mantra-card:hover::before {
+  opacity: 1;
+}
+
+.mantra-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+  gap: 12px;
+}
+
+.mantra-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mantra-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.mantra-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.mantra-tag {
+  font-size: 0.8rem;
+  color: var(--gold-primary);
+  font-weight: 500;
+}
+
+.mantra-text-box {
+  background: rgba(10, 13, 20, 0.8);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  margin-bottom: 20px;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.mantra-verse {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #fef08a;
+  text-align: center;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 15px rgba(254, 240, 138, 0.3);
+  white-space: pre-line;
+}
+
+.mantra-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-expand-mantra {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(249, 115, 22, 0.2) 100%);
+  border: 1px solid var(--gold-primary);
+  color: #fde68a;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-expand-mantra:hover {
+  background: linear-gradient(135deg, var(--gold-primary) 0%, var(--saffron) 100%);
+  color: #0b0f19;
+  box-shadow: 0 4px 15px var(--gold-glow);
+  transform: translateY(-1px);
+}
+
+.btn-expand-mantra .chevron {
+  transition: transform 0.3s ease;
+}
+
+.btn-expand-mantra.open .chevron {
+  transform: rotate(180deg);
+}
+
+.btn-copy-mantra {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-copy-mantra:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: var(--gold-light);
+}
+
+/* Expandable Drawer */
+.mantra-drawer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin-top 0.3s ease;
+  margin-top: 0;
+}
+
+.mantra-drawer.open {
+  max-height: 1400px;
+  opacity: 1;
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px dashed rgba(245, 158, 11, 0.2);
+}
+
+.detail-section {
+  margin-bottom: 20px;
+}
+
+.detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.detail-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.transliteration-text {
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--gold-primary);
+  line-height: 1.7;
+}
+
+.word-meaning-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+
+.word-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.word-term {
+  color: var(--gold-light);
+  font-weight: 700;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.word-def {
+  color: var(--text-secondary);
+}
+
+.simple-meaning-box {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  color: #f1f5f9;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+/* ==========================================================================
    Responsive Adaptations
    ========================================================================== */
 
@@ -796,4 +1095,22 @@ body {
   .card-actions {
     grid-template-columns: 1fr;
   }
+  .mantra-verse {
+    font-size: 1.2rem;
+    line-height: 1.7;
+  }
+  .mantra-card {
+    padding: 20px 16px;
+  }
+  .word-meaning-grid {
+    grid-template-columns: 1fr;
+  }
+  .mantra-card-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-expand-mantra, .btn-copy-mantra {
+    justify-content: center;
+  }
 }
+
