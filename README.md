@@ -14,4 +14,7 @@ You can read the scriptures directly online or download them from the web portal
 - **pdfs/শ্রী শ্রী চণ্ডী.pdf** - Sri Sri Chandi (Devi Mahatmyam, 13.9 MB)
 - **pdfs/আদ্যাস্তোত্রম.pdf** - Adya Stotram (89 KB)
 
+### Devotional Texts & Mantras (স্তব ও মন্ত্র সংকলন)
+- **[প্রণাম_মন্ত্র.md](প্রণাম_মন্ত্র.md)** - দেবদেবীর নিত্য প্রণাম মন্ত্র সংকলন (শ্রীকৃষ্ণ প্রণাম ও অন্যান্য)
+
 *(Editable `.docx` sources are organized locally in `docx/` and excluded via `.gitignore`).*
