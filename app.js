@@ -65,30 +65,6 @@ const SCRIPTURES_DATA = [
     description: 'ব্যাসদেব বিরচিত পবিত্র শ্রী নবগ্রহ স্তোত্রম্ — রবি, চন্দ্র, মঙ্গল, বুধ, বৃহস্পতি, শুক্র, শনি, রাহু ও কেতুর শান্তি ও বিঘ্ননাশন স্তব।',
     icon: '🪐',
     canPreview: true
-  },
-  {
-    id: 'sri-navagraha-stotram-docx',
-    title: 'শ্রী নবগ্রহ স্তোত্রম্',
-    englishTitle: 'Sri Navagraha Stotram (Word Document)',
-    category: 'stotram',
-    format: 'docx',
-    filename: 'শ্রী নবগ্রহ স্তোত্রম্.docx',
-    fileSize: '16 KB',
-    description: 'শ্রী নবগ্রহ স্তোত্রের মূল স্তব ও শ্লোকাবলী (Microsoft Word / সম্পাদনাযোগ্য ফরম্যাট)।',
-    icon: '🪐',
-    canPreview: false
-  },
-  {
-    id: 'adya-docx',
-    title: 'ঔং নম আদ্যায়ৈ',
-    englishTitle: 'Om Namo Adyayai',
-    category: 'stotram',
-    format: 'docx',
-    filename: 'ঔং নম আদ্যায়ৈ.docx',
-    fileSize: '16 KB',
-    description: 'আদ্যা স্তোত্রের পবিত্র মূল স্তোত্রপাঠ ও শ্লোকাবলী (Microsoft Word / সম্পাদনাযোগ্য ফরম্যাট)।',
-    icon: '🪔',
-    canPreview: false
   }
 ];
 
