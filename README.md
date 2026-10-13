@@ -16,6 +16,6 @@ You can read the scriptures directly online or download them from the web portal
 
 ### Devotional Texts & Mantras (স্তব ও মন্ত্র সংকলন)
 - 🌐 **[প্রণাম মন্ত্র ওয়েব পেজ (Pronam Mantras Portal)](https://ombasudeva.github.io/vokti/pronam_mantra.html)** — পদচ্ছেদ, শব্দার্থ ও ভাবার্থসহ ইন্টারেক্টিভ প্রণাম মন্ত্র পেজ
-- **[প্রণাম_মন্ত্র.md](প্রণাম_মন্ত্র.md)** - দেবদেবীর নিত্য প্রণাম মন্ত্র সংকলন (শ্রীকৃষ্ণ, শ্রীশ্রীরাধাকৃষ্ণ, শ্রীশিব, মা দুর্গা, মা কালী, মা লক্ষ্মী, মা সরস্বতী)
+- **[প্রণাম_মন্ত্র.md](প্রণাম_মন্ত্র.md)** - দেবদেবীর নিত্য প্রণাম মন্ত্র সংকলন (শ্রীকৃষ্ণ, শ্রীশ্রীরাধাকৃষ্ণ, শ্রীশিব, মা দুর্গা, মা কালী, মা লক্ষ্মী, মা সরস্বতী, শ্রীগণেশ, শ্রীহনুমান)
 
 *(Editable `.docx` sources are organized locally in `docx/` and excluded via `.gitignore`).*
