@@ -130,11 +130,11 @@ const PRONAM_MANTRAS_DATA = [
     id: 'kali-mukhya',
     deity: 'মা কালী',
     title: 'মা কালী প্রধান প্রণাম মন্ত্র',
-    tag: 'জয়ন্তী মঙ্গলা কালী বন্দনা',
+    tag: 'জয়ন্তী মঙ্গলা ও সৃষ্টিস্থিতিবিনাশানাং বন্দনা',
     category: 'kali',
     icon: '🌺',
-    verse: 'ওঁ জয়ন্তী মঙ্গলা কালী ভদ্রকালী কপালিনী।\nদুর্গা শিবা ক্ষমা ধাত্রী স্বাহা স্বধা নমোহস্তুতে॥',
-    transliteration: 'Om Jayanti Mangala Kali Bhadrakali Kapalini |\nDurga Shiva Kshama Dhatri Svaha Svadha Namo\'stu Te ||',
+    verse: 'ওঁ জয়ন্তী মঙ্গলা কালী ভদ্রকালী কপালিনী।\nদুর্গা শিবা ক্ষমা ধাত্রী স্বাহা স্বধা নমোহস্তুতে॥\nসৃষ্টিস্থিতিবিনাশানাং শক্তিভূতে সনাতনি।\nগুণাশ্রয়ে গুণময়ে নারায়ণি নমোহস্তুতে॥',
+    transliteration: 'Om Jayanti Mangala Kali Bhadrakali Kapalini |\nDurga Shiva Kshama Dhatri Svaha Svadha Namo\'stu Te ||\nSrishti-sthiti-vinashanam Shakti-bhute Sanatani |\nGunashraye Gunamaye Narayani Namo\'stu Te ||',
     wordMeanings: [
       { term: 'ওঁ', def: 'পরমব্রহ্মের মূল প্রণবধ্বনি।' },
       { term: 'জয়ন্তী', def: 'সর্বশ্রেষ্ঠ বিজয়িনী ও পরাক্রমশালিনী।' },
@@ -148,9 +148,15 @@ const PRONAM_MANTRAS_DATA = [
       { term: 'ধাত্রী', def: 'সমগ্র বিশ্বব্রহ্মাণ্ডের পালনকর্ত্রী মাতা।' },
       { term: 'স্বাহা', def: 'দেবযজ্ঞের আহুতিস্বরূপা।' },
       { term: 'স্বধা', def: 'পিতৃপুরুষের তর্পণস্বরূপা।' },
+      { term: 'সৃষ্টিস্থিতিবিনাশানাং', def: 'সৃষ্টি, স্থিতি (পালন) ও বিনাশের (সংহারের)।' },
+      { term: 'শক্তিভূতে', def: 'মূল কারণ ও মহাশক্তিরূপিণী।' },
+      { term: 'সনাতনি', def: 'নিত্য শাশ্বতী ও অনন্তকালের পরমাদেবী।' },
+      { term: 'গুণাশ্রয়ে', def: 'ত্রিগুণের (সত্ত্ব, রজঃ ও তমঃ) একমাত্র পরম আশ্রয়।' },
+      { term: 'গুণময়ে', def: 'ত্রিগুণস্বরূপিণী ও সর্বগুণান্বিতা।' },
+      { term: 'নারায়ণি', def: 'ভগবান নারায়ণের অচিন্ত্য পরাশক্তি।' },
       { term: 'নমোহস্তুতে', def: 'আপনাকে আমার ভক্তিপূর্ণ সশ্রদ্ধ প্রণাম নিবেদন করি।' }
     ],
-    simpleMeaning: 'যিনি সর্বশ্রেষ্ঠা বিজয়িনী জয়ন্তী, পরম মঙ্গলময়ী মঙ্গলা, কালনাশিনী কালী, ভক্তকল্যাণকারিণী ভদ্রকালী এবং কপালিনী; যিনি দুর্গতিহারিণী দুর্গা, কল্যাণময়ী শিবা, ক্ষমাময়ী, বিশ্বধাত্রী এবং স্বাহা ও স্বধারূপিণী—সেই জগজ্জননী মহাশক্তিকে আমার বারবার সশ্রদ্ধ প্রণাম নিবেদন করি।'
+    simpleMeaning: 'যিনি সর্বশ্রেষ্ঠা বিজয়িনী জয়ন্তী, পরম মঙ্গলময়ী মঙ্গলা, কালনাশিনী কালী, ভক্তকল্যাণকারিণী ভদ্রকালী এবং কপালিনী; যিনি দুর্গতিহারিণী দুর্গা, কল্যাণময়ী শিবা, ক্ষমাময়ী, বিশ্বধাত্রী এবং স্বাহা ও স্বধারূপিণী। হে সৃষ্টি, স্থিতি ও প্রলয়ের মূল চালিকাশক্তি সনাতনী দেবী! হে ত্রিগুণের পরম আশ্রয় ও সর্বগুণান্বিতা নারায়ণী, আপনাকে আমার বারবার সশ্রদ্ধ প্রণাম নিবেদন করি।'
   },
   {
     id: 'lakshmi-mukhya',
@@ -181,11 +187,11 @@ const PRONAM_MANTRAS_DATA = [
     id: 'saraswati-mukhya',
     deity: 'মা সরস্বতী',
     title: 'মা সরস্বতী প্রধান প্রণাম মন্ত্র',
-    tag: 'জ্ঞান, বিদ্যা ও সঙ্গীত রূপা বন্দনা',
+    tag: 'জ্ঞান, বিদ্যা ও চরাচরসার বন্দনা',
     category: 'saraswati',
     icon: '🪕',
-    verse: 'ওঁ সরস্বতী মহাভাগে বিদ্যে কমললোচনে।\nবিশ্বরূপে বিশালাক্ষি বিদ্যাং দেহি নমোহস্তুতে॥',
-    transliteration: 'Om Sarasvati Maha-bhage Vidye Kamala-lochane |\nVishva-rupe Vishalakshee Vidyam Dehi Namo\'stu Te ||',
+    verse: 'ওঁ সরস্বতী মহাভাগে বিদ্যে কমললোচনে।\nবিশ্বরূপে বিশালাক্ষি বিদ্যাং দেহি নমোহস্তুতে॥\nজয় জয় দেবি চরাচরসারে কুচযুগশোভিতমুক্তাহারে।\nবীণাপুস্তকধারিণি রূঢ়ে ভগবতি দেবি নমোহস্তুতে॥',
+    transliteration: 'Om Sarasvati Maha-bhage Vidye Kamala-lochane |\nVishva-rupe Vishalakshee Vidyam Dehi Namo\'stu Te ||\nJaya Jaya Devi Charachara-sare Kucha-yuga-shobhita-muktahare |\nVeena-pustaka-dharini Roodhe Bhagavati Devi Namo\'stu Te ||',
     wordMeanings: [
       { term: 'ওঁ', def: 'পরমব্রহ্মের মূল প্রণবধ্বনি।' },
       { term: 'সরস্বতী', def: 'জ্ঞান, প্রজ্ঞা ও সুরের অধিষ্ঠাত্রী দেবী সরস্বতী।' },
@@ -196,14 +202,24 @@ const PRONAM_MANTRAS_DATA = [
       { term: 'বিশালাক্ষি', def: 'বিশাল জ্ঞানদৃষ্টিসম্পন্না।' },
       { term: 'বিদ্যাং', def: 'বিশুদ্ধ জ্ঞান, বিদ্যা ও শুভবুদ্ধি।' },
       { term: 'দেহি', def: 'আমাকে দান করুন।' },
+      { term: 'জয় জয়', def: 'জয় হোক, জয় হোক।' },
+      { term: 'দেবি', def: 'হে চিন্ময়ী পরমাদেবী!' },
+      { term: 'চরাচরসারে', def: 'স্থাবর ও জঙ্গম নিখিল বিশ্বের পরম সারতত্ত্ব।' },
+      { term: 'কুচযুগশোভিতমুক্তাহারে', def: 'বক্ষঃস্থলে মনোহর মুক্তার মালা দ্বারা সুশোভিতা।' },
+      { term: 'বীণাপুস্তকধারিণি', def: 'হস্তে সুরের প্রতীক বীণা ও জ্ঞানস্বরূপ পুস্তকধারিণী।' },
+      { term: 'রূঢ়ে', def: 'হংস বা দিব্য পদ্মাসনে সমাসীনা ও পূজিতা।' },
+      { term: 'ভগবতি', def: 'হে ষড়ৈশ্বর্যশালিনী পরমেশ্বরী!' },
       { term: 'নমোহস্তুতে', def: 'আপনাকে আমার সশ্রদ্ধ ভক্তিপূর্ণ প্রণাম।' }
     ],
-    simpleMeaning: 'হে পরম ভাগ্যবতী দেবী সরস্বতী! আপনি বিদ্যার প্রত্যক্ষ স্বরূপ এবং পদ্মপলাশলোচনা। আপনি বিশ্বরূপিণী এবং বিশাল জ্ঞানদৃষ্টিসম্পন্না। হে জ্ঞানদায়িনী জননী, আমাকে বিশুদ্ধ জ্ঞান ও বিদ্যা দান করুন। আপনার শ্রীচরণে আমার সশ্রদ্ধ প্রণাম নিবেদন করি।'
+    simpleMeaning: 'হে পরম ভাগ্যবতী দেবী সরস্বতী! আপনি বিদ্যার প্রত্যক্ষ স্বরূপ এবং পদ্মপলাশলোচনা। আপনি বিশ্বরূপিণী এবং বিশাল জ্ঞানদৃষ্টিসম্পন্না। হে জ্ঞানদায়িনী জননী, আমাকে বিশুদ্ধ জ্ঞান ও বিদ্যা দান করুন। স্থাবর-জঙ্গম সমগ্র নিখিল বিশ্বের পরম সারস্বরূপা, মুক্তাহার শোভিতা, করকমলে বীণা ও পুস্তকধারিণী পরমেশ্বরী ভগবতীকে আমার সশ্রদ্ধ প্রণাম নিবেদন করি।'
   }
 ];
 
 // DOM Elements
 const mantrasList = document.getElementById('mantrasList');
+const plainTextView = document.getElementById('plainTextView');
+const tabCardsView = document.getElementById('tabCardsView');
+const tabPlainTextView = document.getElementById('tabPlainTextView');
 const mantraSearchInput = document.getElementById('mantraSearchInput');
 const clearMantraSearch = document.getElementById('clearMantraSearch');
 const filterChips = document.querySelectorAll('.chip');
@@ -212,9 +228,11 @@ const mantraCount = document.getElementById('mantra-count');
 const expandAllBtn = document.getElementById('expandAllBtn');
 const collapseAllBtn = document.getElementById('collapseAllBtn');
 const copyToast = document.getElementById('copyToast');
+const actionsHeader = document.querySelector('.mantra-actions-header');
 
 let currentFilter = 'all';
 let currentSearch = '';
+let currentView = 'cards'; // 'cards' | 'plain'
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -237,21 +255,76 @@ function renderMantras() {
     return matchesFilter && matchesSearch;
   });
 
-  mantrasList.innerHTML = '';
-
   if (mantraCount) {
     mantraCount.textContent = `${filtered.length}টি পবিত্র প্রণাম মন্ত্র`;
   }
 
   if (filtered.length === 0) {
     noMantraResults.style.display = 'block';
-  } else {
-    noMantraResults.style.display = 'none';
-    filtered.forEach(item => {
-      const card = createMantraCard(item);
-      mantrasList.appendChild(card);
-    });
+    mantrasList.innerHTML = '';
+    plainTextView.innerHTML = '';
+    return;
   }
+
+  noMantraResults.style.display = 'none';
+  renderCardsView(filtered);
+  renderPlainTextView(filtered);
+}
+
+function renderCardsView(filtered) {
+  mantrasList.innerHTML = '';
+  filtered.forEach(item => {
+    const card = createMantraCard(item);
+    mantrasList.appendChild(card);
+  });
+}
+
+function renderPlainTextView(filtered) {
+  plainTextView.innerHTML = '';
+
+  // Mobile Reading Mode Toolbar
+  const toolbar = document.createElement('div');
+  toolbar.className = 'plain-reader-toolbar';
+  toolbar.innerHTML = `
+    <div class="plain-reader-hint">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+      </svg>
+      <span>মোবাইল পাঠের জন্য প্রস্তুত — মোট ${filtered.length}টি মন্ত্রের ধারাবাহিক শুদ্ধ পাঠ</span>
+    </div>
+    <button class="btn-copy-all" id="btnCopyAllPlain" onclick="copyAllFilteredMantras()" title="সকল মন্ত্র একসাথে কপি করুন">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
+      <span>সব মন্ত্র একসাথে কপি করুন</span>
+    </button>
+  `;
+  plainTextView.appendChild(toolbar);
+
+  // Clean sequential cards
+  filtered.forEach(item => {
+    const card = document.createElement('article');
+    card.className = 'plain-mantra-card';
+    card.innerHTML = `
+      <div class="plain-mantra-top">
+        <div class="plain-deity-badge">
+          <span>${item.icon}</span>
+          <span>${item.deity} — ${item.title}</span>
+        </div>
+        <button class="btn-plain-copy" onclick="copyMantraText('${item.id}')" title="এই মন্ত্রটি কপি করুন">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span>কপি</span>
+        </button>
+      </div>
+      <div class="plain-mantra-text">${item.verse}</div>
+    `;
+    plainTextView.appendChild(card);
+  });
 }
 
 function createMantraCard(item) {
@@ -407,7 +480,61 @@ function collapseAll() {
   });
 }
 
+function copyAllFilteredMantras() {
+  const filtered = PRONAM_MANTRAS_DATA.filter(item => {
+    const matchesFilter = currentFilter === 'all' || item.category === currentFilter;
+    const query = currentSearch.toLowerCase().trim();
+    const matchesSearch = 
+      !query ||
+      item.title.toLowerCase().includes(query) ||
+      item.deity.toLowerCase().includes(query) ||
+      item.verse.toLowerCase().includes(query) ||
+      item.transliteration.toLowerCase().includes(query) ||
+      item.simpleMeaning.toLowerCase().includes(query);
+
+    return matchesFilter && matchesSearch;
+  });
+
+  if (filtered.length === 0) return;
+
+  const fullText = filtered.map(m => `【 ${m.deity} — ${m.title} 】\n${m.verse}`).join('\n\n');
+  navigator.clipboard.writeText(fullText).then(() => {
+    showToast(`✓ মোট ${filtered.length}টি মন্ত্র সফলভাবে কপি হয়েছে!`);
+  }).catch(() => {
+    showToast('নকল করতে ব্যর্থ হয়েছে');
+  });
+}
+
+function switchView(mode) {
+  currentView = mode;
+  if (mode === 'plain') {
+    tabPlainTextView.classList.add('active');
+    tabPlainTextView.setAttribute('aria-selected', 'true');
+    tabCardsView.classList.remove('active');
+    tabCardsView.setAttribute('aria-selected', 'false');
+    
+    mantrasList.style.display = 'none';
+    plainTextView.style.display = 'flex';
+    if (actionsHeader) actionsHeader.style.display = 'none';
+  } else {
+    tabCardsView.classList.add('active');
+    tabCardsView.setAttribute('aria-selected', 'true');
+    tabPlainTextView.classList.remove('active');
+    tabPlainTextView.setAttribute('aria-selected', 'false');
+    
+    mantrasList.style.display = 'block';
+    plainTextView.style.display = 'none';
+    if (actionsHeader) actionsHeader.style.display = 'flex';
+  }
+}
+
 function setupEventListeners() {
+  // View mode tab switching
+  if (tabCardsView && tabPlainTextView) {
+    tabCardsView.addEventListener('click', () => switchView('cards'));
+    tabPlainTextView.addEventListener('click', () => switchView('plain'));
+  }
+
   // Search
   mantraSearchInput.addEventListener('input', (e) => {
     currentSearch = e.target.value;

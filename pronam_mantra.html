@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=7">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪔</text></svg>">
 </head>
 <body>
@@ -73,6 +73,30 @@
       </div>
     </div>
 
+    <!-- View Mode Switcher Tabs -->
+    <div class="view-mode-tabs" role="tablist" aria-label="ভিউ মোড নির্বাচন">
+      <button class="view-tab-btn active" id="tabCardsView" role="tab" aria-selected="true" data-view="cards">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        <span>সবিস্তার কার্ড ভিউ</span>
+      </button>
+      <button class="view-tab-btn" id="tabPlainTextView" role="tab" aria-selected="false" data-view="plain">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="8" y1="6" x2="21" y2="6"></line>
+          <line x1="8" y1="12" x2="21" y2="12"></line>
+          <line x1="8" y1="18" x2="21" y2="18"></line>
+          <line x1="3" y1="6" x2="3.01" y2="6"></line>
+          <line x1="3" y1="12" x2="3.01" y2="12"></line>
+          <line x1="3" y1="18" x2="3.01" y2="18"></line>
+        </svg>
+        <span>একনজরে সকল মন্ত্র (রিডিং মোড)</span>
+      </button>
+    </div>
+
     <!-- Search & Filter Controls -->
     <div class="controls-panel">
       <div class="search-box">
@@ -95,9 +119,14 @@
       </div>
     </div>
 
-    <!-- Mantras Container -->
+    <!-- 1. Detailed Mantras Container (Card View) -->
     <div id="mantrasList">
       <!-- Cards rendered via JavaScript -->
+    </div>
+
+    <!-- 2. Plain Text Mobile Reading Container -->
+    <div id="plainTextView" class="plain-text-container" style="display: none;">
+      <!-- Plain text items rendered via JavaScript -->
     </div>
 
     <!-- Empty state if search finds nothing -->
@@ -124,6 +153,6 @@
     </div>
   </footer>
 
-  <script src="pronam_mantra.js?v=2"></script>
+  <script src="pronam_mantra.js?v=3"></script>
 </body>
 </html>
