@@ -64,7 +64,8 @@ const SCRIPTURES_DATA = [
     fileSize: '64 KB',
     description: 'ব্যাসদেব বিরচিত পবিত্র শ্রী নবগ্রহ স্তোত্রম্ — রবি, চন্দ্র, মঙ্গল, বুধ, বৃহস্পতি, শুক্র, শনি, রাহু ও কেতুর শান্তি ও বিঘ্ননাশন স্তব।',
     icon: '🪐',
-    canPreview: true
+    canPreview: true,
+    interactiveUrl: 'navagraha_stotram.html'
   }
 ];
 
@@ -166,8 +167,19 @@ function createScriptureCard(item) {
   const safePath = getSafePath(item.filename);
   const downloadName = item.filename.split('/').pop();
 
+  const interactiveHtml = item.interactiveUrl
+    ? `
+      <div style="margin-bottom: 8px;">
+        <a href="${item.interactiveUrl}" class="btn-read" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(249, 115, 22, 0.25) 100%); border: 1px solid var(--gold-light); color: #fff; width: 100%; justify-content: center; font-weight: 600;">
+          🪐 অর্থসহ স্তোত্র ও বীজ মন্ত্র পড়ুন
+        </a>
+      </div>
+    `
+    : '';
+
   const actionsHtml = item.canPreview 
     ? `
+      ${interactiveHtml}
       <div class="card-actions">
         <button class="btn-read" onclick="openReader('${item.id}')" aria-label="অনলাইনে পড়ুন ${item.title}">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
